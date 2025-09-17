@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><genericFlow id="1" name="urn:Services.NameOfService1.NameOfPortType1.NameOfPortType1.operation1" objectId="nullRootObject_629718776" runtime="0ms">
+<startTime value="1493899469"/>
+<input objectId="nullInput_416973673">
+<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" namespace="urn:Services.NameOfService1.Classes" objectId="nullData_2105980401" xsi:type="inputClass">input0</request>
+</input>
+<activity name="-" objectId="nullActivity_831238371" runtime="0ms">
+</activity>
+<activity name="create_responses...2071638018|_18_0_6_f4d0365_1753812014140_974205_14039" objectId="nullActivity_389387712" runtime="0ms">
+<startTime value="1493899469"/>
+<transformerFlow name="create_responses...2071638018|_18_0_6_f4d0365_1753812014140_974205_14039" objectId="nullTransformerFlow_1195550709" runtime="0ms">
+<startTime value="1493899469"/>
+<input objectId="nullInput_253995985">
+<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" namespace="urn:Services.NameOfService1.Classes" objectId="nullData_181167525" xsi:type="inputClass">input1</request>
+</input>
+<Script id="SCRIPT12"/>
+
+
+
+
+
+
+<output objectId="nullOutput_2120354014">
+<response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" namespace="urn:Services.NameOfService1.Classes" objectId="nullData_1095068241" xsi:type="outputClass">output11</response>
+</output>
+<stopTime value="1493899469"/>
+</transformerFlow>
+<stopTime value="1493899469"/>
+</activity>
+<branches name="...2071638018|_18_0_6_f4d0365_1758100219799_637533_13958" objectId="nullBranches_22132725">
+<Script id="SCRIPT17"/>
+</branches>
+<activity name="blocked...2071638018|_18_0_6_f4d0365_1758100223778_690616_13968" objectId="nullActivity_372632246" runtime="0ms">
+<startTime value="1493899469"/>
+<transformerFlow name="blocked...2071638018|_18_0_6_f4d0365_1758100223778_690616_13968" objectId="nullTransformerFlow_738480261" runtime="0ms">
+<startTime value="1493899469"/>
+<input objectId="nullInput_1628012892">
+</input>
+<Script id="SCRIPT26"/>
+
+
+
+<output objectId="nullOutput_1628517362">
+<response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" namespace="urn:Services.NameOfService1.Classes" objectId="nullData_1703612132" xsi:type="outputClass">output25</response>
+</output>
+<stopTime value="1493899469"/>
+</transformerFlow>
+<stopTime value="1493899469"/>
+</activity>
+<output objectId="nullOutput_895548620">
+<response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" namespace="urn:Services.NameOfService1.Classes" objectId="nullData_947195882" xsi:type="outputClass">output27</response>
+</output>
+<stopTime value="1493899469"/>
+</genericFlow>

@@ -1,0 +1,15 @@
+#Thu Sep 18 06:06:52 SGT 2025
+use.inspection.list=false
+control.url=http\://localhost\:21176
+last.run.inspection={}
+inspection={}
+location.custom=http\://localhost\:11165/BuilderUMLService/NameOfPortType1
+trace.maxsize=10
+request.timeout=180
+trace.enabled=true
+last.run.trace.mode=0
+trace.mode=-1
+property.trace.ignore.all.not.inspected=false
+location=http\://localhost\:11165/BuilderUMLService/NameOfPortType1
+description=
+outdated=false
