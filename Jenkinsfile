@@ -1,12 +1,7 @@
 #!groovy
 
 pipeline {
-    agent {
-        node {
-            label 'Windows'
-            customWorkspace "workspace/appendarrayexercise"
-        }
-    }
+    agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '1'))
@@ -53,15 +48,34 @@ pipeline {
                     bat """
                         echo "Running regression tests..."
                         echo "Connecting to Bridge: ${BRIDGE_HOST}:${BRIDGE_PORT}"
-                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/testsuite.xml" -logfile test-results.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
-                        echo "Tests completed"
+                        
+                        echo "=== Running Main Test Suite ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/testsuite.xml" -logfile test-results-main.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "=== Running Valid Employees Tests ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/validEmps/testsuite.xml" -logfile test-results-validEmps.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "=== Running Blocked Employee Tests ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/BlockedEmp/testsuite.xml" -logfile test-results-blockedEmp.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "=== Running Position Check Tests ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/PositionSc/testsuite.xml" -logfile test-results-positionSc.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "=== Running Test Scenarios ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/Testscen/testsuite.xml" -logfile test-results-testScen.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "=== Running Bridge Connection Tests ==="
+                        java -jar ${REGTEST} -project BuilderUML -suite "regressiontest/testsuite/bridgeconn/testsuite.xml" -logfile test-results-bridgeconn.xml -host ${BRIDGE_HOST} -port ${BRIDGE_PORT} -username ${BRIDGE_USER} -password ${BRIDGE_PASSWORD}
+                        
+                        echo "All regression tests completed successfully!"
                     """
                 }
             }
             post {
                 always {
-                    junit 'appendarrayexercise/test-results.xml'
-                    archiveArtifacts artifacts: 'appendarrayexercise/test-results.xml'
+                    junit 'appendarrayexercise/test-results-*.xml'
+                    archiveArtifacts artifacts: 'appendarrayexercise/test-results-*.xml'
+                    archiveArtifacts artifacts: 'appendarrayexercise/regressiontest/.$output/**/*'
                 }
             }
         }
