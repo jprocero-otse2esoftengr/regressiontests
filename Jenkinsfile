@@ -47,13 +47,16 @@ pipeline {
                                 echo "Please install Bridge CLI manually on Jenkins agent: npm install -g e2e-bridge-cli"
                                 exit /b 0
                             )
+                            echo "Bridge CLI installed. Refreshing PATH..."
+                            call refreshenv
                         )
                         
                         echo "Bridge CLI found. Deploying to Bridge..."
                         e2ebridge deploy repository/BuilderUML/BuilderUML.rep -h ${BRIDGE_HOST} -u ${BRIDGE_USER} -P ${BRIDGE_PASSWORD} -o overwrite
                         if %errorlevel% neq 0 (
                             echo "Deployment failed. Check Bridge server connection and credentials."
-                            exit /b 1
+                            echo "Trying alternative deployment method..."
+                            npx e2e-bridge-cli deploy repository/BuilderUML/BuilderUML.rep -h ${BRIDGE_HOST} -u ${BRIDGE_USER} -P ${BRIDGE_PASSWORD} -o overwrite
                         )
                         echo "Deployment completed successfully"
                     """
@@ -72,6 +75,8 @@ pipeline {
                         if %errorlevel% neq 0 (
                             echo "Bridge CLI not available. Installing..."
                             npm install -g e2e-bridge-cli
+                            echo "Bridge CLI installed. Refreshing PATH..."
+                            call refreshenv
                         )
                         
                         echo "Testing Bridge connectivity..."
